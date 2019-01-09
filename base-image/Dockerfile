@@ -3,9 +3,10 @@ LABEL MAINTAINER "Jose Moreira <josemoreiravarzim@gmail.com>"
 ARG VERSION
 ARG TARGET
 
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get -t jessie-backports install "gosu" \
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+RUN sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates wget curl rsync \
         git subversion \
